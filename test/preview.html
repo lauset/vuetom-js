@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vuetom Preview</title>
+  <script src="../vuetom.min.js"></script>
+  <script src="../plugin/date.js"></script>
+  <script>
+    console.log(window);
+    var vt = vuetom
+    var vt_d = window.vt_plugin_date
+    vt.use(vt_d)
+    console.log(vt().date(new Date, 'YY MM DD'))
+    document.write(`${vt.lang}`)
+  </script>
+</head>
+
+<body>
+  <div id="root">
+    root
+  </div>
+</body>
+
+</html>
