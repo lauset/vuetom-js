@@ -4,21 +4,19 @@
 <head>
   <meta charset="utf-8">
   <title>Vuetom Preview</title>
-  <script src="../vuetom.min.js"></script>
-  <script src="../plugin/date.js"></script>
+  <script src="./vuetom/vuetom.umd.js"></script>
+  <script src="./vuetom/plugin/date.js"></script>
+  <script src="./vuetom/plugin/request.js"></script>
   <script>
-    console.log(window);
-    var vt = vuetom
-    var vt_d = window.vt_plugin_date
-    vt.use(vt_d)
-    console.log(vt().date(new Date, 'YY MM DD'))
-    document.write(`${vt.lang}`)
+    var vt = vuetom.createVuetom()
+    var date_plugin = window.vt_plugin_date
+    vt.use(date_plugin)
+    console.log(vt.date(new Date, 'YY MM DD'))
   </script>
 </head>
 
 <body>
   <div id="root">
-    root
   </div>
 </body>
 
