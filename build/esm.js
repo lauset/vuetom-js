@@ -16,14 +16,14 @@ const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFile
     readLocaleDir.forEach(async (l) => {
       const filePath = path.join(localeDir, l)
       const readFile = await promisify(fs.readFile)(filePath, 'utf8')
-      const result = readFile.replace("'dayjs'", "'../index'")
+      const result = readFile.replace("'vuetom'", "'../index'")
       await promisify(fs.writeFile)(filePath, result, 'utf8')
     })
 
     await promisify(ncp)('./types/', './esm')
 
     const readLocaleFile = await promisify(fs.readFile)(localeTypePath, 'utf8')
-    const localResult = readLocaleFile.replace("'dayjs", "'dayjs/esm")
+    const localResult = readLocaleFile.replace("'vuetom", "'vuetom/esm")
     await promisify(fs.writeFile)(localeTypePath, localResult, 'utf8')
 
     const readPluginDir = await promisify(fs.readdir)(pluginDir)
@@ -33,7 +33,7 @@ const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFile
         const filePath = path.join(pluginDir, p)
         const targetPath = path.join(pluginDir, pluginName, `index${typeFileExt}`)
         const readFile = await promisify(fs.readFile)(filePath, 'utf8')
-        const result = readFile.replace(/'dayjs'/g, "'dayjs/esm'")
+        const result = readFile.replace(/'vuetom'/g, "'vuetom/esm'")
         await promisify(fs.writeFile)(targetPath, result, 'utf8')
         await promisify(fs.unlink)(filePath)
       }

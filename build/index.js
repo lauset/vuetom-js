@@ -59,7 +59,7 @@ async function listLocaleJson(localeArr) {
 
     build(configFactory({
       input: './src/index.js',
-      fileName: './vuetom.min.js'
+      fileName: './vuetom.umd.js'
     }))
 
     await promisify(ncp)('./types/', './')

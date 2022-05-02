@@ -32,7 +32,7 @@
       2,
       {
         "ignore": [
-          "dayjs"
+          "vuetom"
         ]
       }
     ],
