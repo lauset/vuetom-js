@@ -1,6 +1,6 @@
 export default (o, c) => {
   const proto = c.prototype
-  proto.dateObjct = function () {
+  proto.getDate = function () {
     return {
       years: this.$date.$y,
       months: this.$date.$M,

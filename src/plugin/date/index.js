@@ -1,4 +1,5 @@
 import Utils from './utils'
+import setupDateObject from './dateObject'
 
 export default (_option, _v) => {
   const { C } = Utils
@@ -71,5 +72,6 @@ export default (_option, _v) => {
     }
     return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', ''))
   }
+  setupDateObject({}, _v)
 }
 
