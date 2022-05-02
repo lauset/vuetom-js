@@ -1,4 +1,5 @@
 import en from './locale/en'
+import pkg from '../package.json'
 
 let Lang = 'en'
 const Langs = {}
@@ -30,13 +31,20 @@ const parseLocale = (preset, object, isLocal) => {
 }
 
 class Vuetom {
-  constructor(o) {
-    this.$L = parseLocale(o.locale, null, true)
-    this.version = '1.0.6'
-    this.options = o
+  constructor(cfg) {
+    this.$L = parseLocale(cfg.locale, null, true)
+    this.version = pkg.version
+    this.options = cfg
   }
   $locale() {
     return Langs[this.$L]
+  }
+  use(plugin, option) {
+    if (!plugin.$i) {
+      plugin(option, Vuetom)
+      plugin.$i = true
+    }
+    return this
   }
 }
 const isVuetom = d => d instanceof Vuetom
@@ -47,18 +55,10 @@ const vuetom = function (v) {
   return new Vuetom(options)
 }
 
-vuetom.use = (plugin, option) => {
-  if (!plugin.$i) {
-    plugin(option, Vuetom, vuetom)
-    plugin.$i = true
-  }
-  return vuetom
-}
-
-vuetom.isVuetom = isVuetom
 vuetom.locale = parseLocale
-vuetom.lang = Lang
-vuetom.langs = Langs
 vuetom.prototype = Vuetom.prototype
 
-export default vuetom
+export {
+  vuetom as createVuetom,
+  isVuetom
+}

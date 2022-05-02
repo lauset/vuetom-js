@@ -1,8 +1,10 @@
 /// <reference path="./locale/index.d.ts" />
 
-export = vuetom;
+// export = vuetom;
 
-declare function vuetom (lang?: vuetom.ConfigType): vuetom.Vuetom
+export declare function createVuetom (lang?: vuetom.ConfigType): vuetom.Vuetom
+
+export declare function isVuetom(d: any): d is Vuetom
 
 declare namespace vuetom {
   interface ConfigTypeMap {
@@ -25,15 +27,13 @@ declare namespace vuetom {
     locale(): string
 
     locale(preset: string | ILocale, object?: Partial<ILocale>): Vuetom
+
+    use <T = unknown>(plugin: PluginFunc<T>, option?: T): Vuetom
   }
 
   export type PluginFunc<T = unknown> = (option: T, c: typeof Vuetom, d: typeof vuetom) => void
 
-  export function use <T = unknown>(plugin: PluginFunc<T>, option?: T): Vuetom
-
   export function locale(preset?: string | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
 
-  export function isVuetom(d: any): d is Vuetom
-
-  const Langs : { [key: string] :  ILocale }
+  // const Langs : { [key: string] :  ILocale }
 }

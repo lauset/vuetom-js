@@ -1,17 +1,17 @@
 {
   "name": "vuetom",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "A JS library with little function",
-  "main": "vuetom.min.js",
+  "main": "vuetom.umd.js",
+  "module": "vuetom.esm.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
-    "test-tz": "date && jest test/timezone.test --coverage=false",
+    "b": "rollup -c build/rollup.m.js",
     "test-v": "jest test/plugin.test  --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
     "prettier": "prettier --write \"docs/**/*.md\"",
-    "babel": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
-    "build": "cross-env BABEL_ENV=build node build",
+    "esm": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
+    "umd": "cross-env BABEL_ENV=build node build",
     "pub": "npm publish"
   },
   "jest": {
@@ -43,13 +43,15 @@
     "@babel/cli": "^7.0.0-beta.44",
     "@babel/core": "^7.0.0-beta.44",
     "@babel/node": "^7.0.0-beta.44",
+    "@babel/plugin-transform-modules-umd": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/preset-env": "^7.7.1",
+    "@rollup/plugin-babel": "^5.3.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
-    "babel-loader": "^8.2.5",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "cross-env": "^5.1.6",
-    "css-loader": "^6.7.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",
@@ -64,8 +66,16 @@
     "react-dom": "^18.1.0",
     "rollup": "^2.45.1",
     "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-terser": "^7.0.2",
-    "style-loader": "^3.3.1",
-    "typescript": "^2.8.3"
+    "stream": "^0.0.2",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "needle": "^3.1.0"
   }
 }
