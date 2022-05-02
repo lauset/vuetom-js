@@ -1,5 +1,5 @@
 // English (Australia) [en-au]
-import dayjs from 'dayjs'
+import vuetom from 'vuetom'
 
 const locale = {
   name: 'en-au',
@@ -35,7 +35,7 @@ const locale = {
   }
 }
 
-dayjs.locale(locale, null, true)
+vuetom.locale(locale, null, true)
 
 export default locale
 
