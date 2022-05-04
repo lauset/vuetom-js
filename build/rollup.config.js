@@ -5,8 +5,14 @@ const json = require('rollup-plugin-json')
 const { terser } = require('rollup-plugin-terser')
 const nodePolyfills = require('rollup-plugin-node-polyfills')
 const replace = require('rollup-plugin-replace')
+const pkg = require('../package.json')
 
 module.exports = (config) => {
+  const banner = `/*!
+  * ${pkg.name} v${pkg.version}
+  * Build Date ${new Date().toLocaleString()} 
+  * @license MIT
+  */`
   const { input, fileName, name } = config
   return {
     input: {
@@ -31,6 +37,7 @@ module.exports = (config) => {
       name: name || 'vuetom',
       file: fileName,
       format: 'umd',
+      banner,
       globals: {
         needle: 'needle',
         vuetom: 'vuetom'
