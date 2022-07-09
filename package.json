@@ -1,81 +1,23 @@
 {
-  "name": "vuetom",
-  "version": "0.2.1",
-  "description": "A JS library with little function",
-  "main": "vuetom.umd.js",
-  "module": "vuetom.esm.js",
-  "types": "index.d.ts",
-  "scripts": {
-    "b": "rollup -c build/rollup.m.js",
-    "test-v": "jest test/plugin.test  --coverage=false",
-    "lint": "./node_modules/.bin/eslint src/* test/* build/*",
-    "prettier": "prettier --write \"docs/**/*.md\"",
-    "esm": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
-    "umd": "cross-env BABEL_ENV=build node build",
-    "pub": "npm publish"
-  },
-  "jest": {
-    "roots": [
-      "test"
-    ],
-    "testRegex": "test/(.*?/)?.*test.js$",
-    "testURL": "http://localhost",
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*"
-    ]
-  },
-  "keywords": [
-    "vuetom",
-    "js",
-    "dom",
-    "date"
+  "name": "@vuetom/root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "author": "lauset",
-  "license": "MIT",
-  "homepage": "https://github.com/lauset/vuetom-js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lauset/vuetom-js.git"
-  },
+  "scripts": {},
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.44",
-    "@babel/core": "^7.0.0-beta.44",
-    "@babel/node": "^7.0.0-beta.44",
-    "@babel/plugin-transform-modules-umd": "^7.16.7",
-    "@babel/plugin-transform-runtime": "^7.17.10",
-    "@babel/preset-env": "^7.7.1",
-    "@rollup/plugin-babel": "^5.3.1",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^22.4.3",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "cross-env": "^5.1.6",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.10.0",
-    "eslint-plugin-jest": "^21.15.0",
-    "jasmine-core": "^2.99.1",
-    "jest": "^22.4.3",
-    "mockdate": "^2.0.2",
+    "chalk": "^4.1.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "jest": "^28.1.2",
     "ncp": "^2.0.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.16.1",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "rollup": "^2.45.1",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-polyfills": "^0.2.1",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-terser": "^7.0.2",
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
     "stream": "^0.0.2",
-    "typescript": "^4.6.4"
-  },
-  "dependencies": {
-    "needle": "^3.1.0"
+    "typescript": "^4.7.4"
   }
 }
