@@ -9,8 +9,6 @@
 
 ### Installation
 
-current version: v0.2.1
-
 ```console
 npm install vuetom --save
 ```
@@ -61,7 +59,7 @@ Available Plugins: date
 
 ```js
 import { createVuetom } from 'vuetom'
-import date from 'vuetom/esm/plugin/date'
+import date from 'vuetom/plugin/date'
 // The usage is the same as nodejs
 // ...
 ```
@@ -71,21 +69,71 @@ import date from 'vuetom/esm/plugin/date'
 Available Plugins: date
 
 ```html
-<script src="./vuetom/vuetom.umd.js"></script>
-<script src="./vuetom/plugin/date.js"></script>
+<script src="../vuetom/dist/vuetom.js"></script>
+<script src="../vuetom/dist/plugin/date.js"></script>
+<script src="../vuetom/dist/plugin/storage.js"></script>
 <script>
   var vt = vuetom.createVuetom()
-  var date_plugin = window.vt_plugin_date
-  vt.use(date_plugin)
+  var vt_date = window.vt_plugin_date
+  var vt_storage = window.vt_plugin_storage
+
+  vt.use(vt_date)
   console.log(vt.date(new Date, 'YY MM DD'))
+
+  vt.use(vt_storage)
+  vt.storage.set('key1', 'val1')
+  console.log(vt.storage.get('key1')) // val1
 </script>
 ```
 
-### Plugin
+## Plugins
 
+[Common]
 - date: Simple date time conversion
 
+[Node]
 - request: HTTP request based on nodejs
+
+[Browser]
+- storage: LocalStorage Utils
+
+<br>
+
+## Development
+
+```
+pnpm install
+```
+
+**packages/vuetom**
+
+```sh
+cd packages/vuetom
+
+# build dist
+pnpm b
+
+# build modules
+pnpm b:esm
+
+# build browser node
+pnpm b:umd
+```
+
+**packages/test**
+
+```sh
+cd packages/test
+
+# node test
+pnpm test-n 
+
+# es test
+pnpm test-es
+
+# web test
+# preview.html
+```
 
 ## License
 
