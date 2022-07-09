@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vuetom Preview</title>
+  <script src="../vuetom/dist/vuetom.js"></script>
+  <script src="../vuetom/dist/plugin/date.js"></script>
+  <script src="../vuetom/dist/plugin/storage.js"></script>
+  <script>
+    var vt = vuetom.createVuetom()
+    var vt_date = window.vt_plugin_date
+    var vt_storage = window.vt_plugin_storage
+
+    vt.use(vt_date)
+    console.log(vt.date(new Date, 'YY MM DD'))
+
+    vt.use(vt_storage)
+    vt.storage.set('key1', 'val1')
+    console.log(vt.storage.get('key1')) // val1
+  </script>
+</head>
+
+<body>
+  <div id="root">
+  </div>
+</body>
+
+</html>

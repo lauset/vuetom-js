@@ -1,0 +1,18 @@
+{
+  "name": "@vuetom/test",
+  "version": "0.0.1",
+  "description": "Node Test",
+  "scripts": {
+    "test-n": "node index.js",
+    "test-es": "babel-node es.js",
+    "test-p": "jest plugin.test.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/node": "^7.18.6",
+    "@babel/preset-env": "^7.18.6"
+  },
+  "dependencies": {
+    "vuetom": "workspace:^0.3.0"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "name": "vuetom",
+  "version": "0.3.0",
+  "description": "A JS library with little function",
+  "main": "dist/vuetom.js",
+  "module": "dist/vuetom.esm.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "browser": "./dist/vuetom.js",
+      "node": {
+        "import": {
+          "default": "./dist/vuetom.esm.js"
+        },
+        "require": {
+          "default": "./dist/vuetom.js"
+        }
+      },
+      "import": "./dist/vuetom.esm.js"
+    },
+    "./plugin/*": "./dist/plugin/*.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "b": "pnpm clean && pnpm b:esm && pnpm b:umd",
+    "b:esm": "rollup -c ../../build/rollup.esm.js --environment TARGET:dev",
+    "b:umd": "rollup -c ../../build/rollup.umd.js --environment TARGET:dev",
+    "clean": "rimraf dist",
+    "test-v": "jest test/plugin.test  --coverage=false",
+    "lint": "./node_modules/.bin/eslint src/* test/* build/*",
+    "copy": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
+    "pub": "npm publish"
+  },
+  "jest": {
+    "roots": [
+      "test"
+    ],
+    "testRegex": "test/(.*?/)?.*test.js$",
+    "testURL": "http://localhost",
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*"
+    ]
+  },
+  "files": [
+    "dist/",
+    "types/",
+    "LICENSE"
+  ],
+  "keywords": [
+    "vuetom",
+    "js",
+    "date"
+  ],
+  "author": "lauset",
+  "license": "MIT",
+  "homepage": "https://github.com/lauset/vuetom-js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lauset/vuetom-js.git"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/node": "^7.18.6",
+    "@babel/plugin-transform-async-to-generator": "^7.18.6",
+    "@babel/plugin-transform-modules-umd": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/runtime": "^7.18.6",
+    "@babel/runtime-corejs3": "^7.18.6",
+    "@rollup/plugin-alias": "^3.1.9",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-replace": "^4.0.0",
+    "rollup": "^2.76.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "needle": "^3.1.0"
+  }
+}
