@@ -1,18 +1,21 @@
 {
-  "name": "@vuetom/test",
+  "name": "@vuetomjs/test",
   "version": "0.0.1",
   "description": "Node Test",
+  "type": "commonjs",
   "scripts": {
     "test-n": "node index.js",
     "test-es": "babel-node es.js",
+    "test-b": "open ./preview.html",
     "test-p": "jest plugin.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
     "@babel/node": "^7.18.6",
-    "@babel/preset-env": "^7.18.6"
+    "@babel/preset-env": "^7.18.6",
+    "typescript": "^4.9.3"
   },
   "dependencies": {
-    "vuetom": "workspace:^0.3.0"
+    "vuetom": "workspace:^*"
   }
 }

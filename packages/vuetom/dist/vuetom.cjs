@@ -1,9 +1,11 @@
 /*!
   * vuetom v0.5.0 A JS library with little function
-  * Build Date 2022/12/3 12:55:50
+  * Build Date 2022/12/3 12:55:53
   * Build Env dev
   * @license MIT
   */
+'use strict';
+
 var version = "0.5.0";
 
 // 默认缓存期限为7天
@@ -194,4 +196,7 @@ const vuetomInstance = function (options) {
 };
 vuetomInstance.prototype = Vuetom.prototype;
 
-export { arr, vuetomInstance as createVuetom, isVuetom, storage };
+exports.arr = arr;
+exports.createVuetom = vuetomInstance;
+exports.isVuetom = isVuetom;
+exports.storage = storage;

@@ -1,11 +1,3 @@
-/// <reference path="./locale/index.d.ts" />
-
-// export = vuetom;
-
-export declare function createVuetom (lang?: vuetom.ConfigType): vuetom.Vuetom
-
-export declare function isVuetom(d: any): d is Vuetom
-
 declare namespace vuetom {
   interface ConfigTypeMap {
     default: string | number | Date | Vuetom | null | undefined
@@ -13,27 +5,88 @@ declare namespace vuetom {
 
   export type ConfigType = ConfigTypeMap[keyof ConfigTypeMap]
 
-  export interface FormatObject { locale?: string, format?: string, utc?: boolean }
+  export interface VuetomOptions {
+    local: string
+  }
+
+  export interface FormatObject {
+    locale?: string
+    format?: string
+    utc?: boolean
+  }
 
   export type OptionType = FormatObject | string | string[]
 
   export type UnitTypeShort = 'd' | 'D' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
 
   class Vuetom {
-    constructor (config?: ConfigType)
+    constructor (opts?: ConfigType)
 
-    date(date: vuetom.ConfigType, format?: vuetom.OptionType): string
-    
-    locale(): string
+    prototype?: any
 
-    locale(preset: string | ILocale, object?: Partial<ILocale>): Vuetom
+    options: any
 
-    use <T = unknown>(plugin: PluginFunc<T>, option?: T): Vuetom
+    version: string
+
+    arr: VuetomArr
+
+    storage: VuetomStorage
+
+    // date? (date: vuetom.ConfigType, format?: vuetom.OptionType): string
+
+    // locale(preset: string | ILocale, object?: Partial<ILocale>): Vuetom
+
+    use<T = unknown>(plugin: PluginFunc<T>, option?: any): Vuetom
   }
 
-  export type PluginFunc<T = unknown> = (option: T, c: typeof Vuetom, d: typeof vuetom) => void
+  export type PluginFunc<T = unknown> = (
+    option: T,
+    vuetom: typeof Vuetom
+  ) => {
+    $i: boolean
+  }
 
-  export function locale(preset?: string | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
+  // export function locale(preset?: string | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
 
   // const Langs : { [key: string] :  ILocale }
 }
+
+export declare interface VuetomArr {
+  addFirst: (arr: any[], val: any) => any[]
+
+  removeFirst: (arr: any[]) => any[]
+}
+
+export declare interface VuetomStorage {
+  getKey: (key: string) => string
+
+  set: (key: string, value: any, expire?: number) => void
+
+  get: (key: string, def = null) => any
+
+  remove: (key: string) => void
+
+  clear: () => void
+
+  setCookie: (name: string, value: string | number, expire: number) => any
+
+  getCookie: (name: string) => string
+
+  removeCookie: (key: string) => void
+
+  clearCookie: () => void
+}
+
+export declare function createVuetom (optin?: any): vuetom.Vuetom
+
+export declare function isVuetom (vuetom: any): vuetom is vuetom.Vuetom
+
+/**
+ * Plugin Func Arr
+ */
+export declare const arr: vuetom.PluginFunc<VuetomArr>
+
+/**
+ * Plugin Func Storage
+ */
+export declare const storage: vuetom.PluginFunc<VuetomStorage>

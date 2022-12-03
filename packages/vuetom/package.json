@@ -1,34 +1,38 @@
 {
   "name": "vuetom",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "A JS library with little function",
+  "type": "module",
   "main": "dist/vuetom.js",
   "module": "dist/vuetom.esm.js",
-  "types": "dist/types/index.d.ts",
+  "types": "types/index.d.ts",
   "exports": {
     ".": {
-      "browser": "./dist/vuetom.js",
+      "browser": "./dist/vuetom.esm.js",
       "node": {
         "import": {
           "default": "./dist/vuetom.esm.js"
         },
         "require": {
-          "default": "./dist/vuetom.js"
+          "default": "./dist/vuetom.cjs"
         }
       },
-      "import": "./dist/vuetom.esm.js"
+      "import": "./dist/vuetom.esm.js",
+      "types": "./types/index.d.ts"
     },
-    "./plugin/*": "./dist/plugin/*.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./dist/*": "./dist/*"
   },
   "scripts": {
-    "b": "pnpm clean && pnpm b:esm && pnpm b:umd",
-    "b:esm": "rollup -c ../../build/rollup.esm.js --environment TARGET:dev",
-    "b:umd": "rollup -c ../../build/rollup.umd.js --environment TARGET:dev",
+    "b": "pnpm clean && pnpm b:es && pnpm b:cjs && pnpm b:umd && pnpm b:umd:min && pnpm b:dts",
+    "b:es": "cross-env VT_ENV=dev rollup -c --environment FORMAT:es",
+    "b:cjs": "cross-env VT_ENV=dev rollup -c --environment FORMAT:cjs",
+    "b:umd": "cross-env VT_ENV=dev rollup -c --environment FORMAT:umd",
+    "b:umd:min": "cross-env VT_ENV=prod rollup -c --environment FORMAT:umd",
+    "b:dts": "api-extractor run --local --verbose && tail -n +3 ./src/extensions.ts >> dist/vuetom.d.ts",
     "clean": "rimraf dist",
     "test-v": "jest test/plugin.test  --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
-    "copy": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
     "pub": "npm publish"
   },
   "jest": {
@@ -45,13 +49,13 @@
   },
   "files": [
     "dist/",
+    "temp/",
     "types/",
     "LICENSE"
   ],
   "keywords": [
     "vuetom",
-    "js",
-    "date"
+    "js"
   ],
   "author": "lauset",
   "license": "MIT",
@@ -61,25 +65,15 @@
     "url": "https://github.com/lauset/vuetom-js.git"
   },
   "devDependencies": {
-    "@babel/cli": "^7.18.6",
-    "@babel/core": "^7.18.6",
-    "@babel/node": "^7.18.6",
-    "@babel/plugin-transform-async-to-generator": "^7.18.6",
-    "@babel/plugin-transform-modules-umd": "^7.18.6",
-    "@babel/plugin-transform-runtime": "^7.18.6",
-    "@babel/preset-env": "^7.18.6",
-    "@babel/runtime": "^7.18.6",
-    "@babel/runtime-corejs3": "^7.18.6",
-    "@rollup/plugin-alias": "^3.1.9",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.1",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-replace": "^4.0.0",
-    "rollup": "^2.76.0",
-    "rollup-plugin-terser": "^7.0.2"
-  },
-  "dependencies": {
-    "needle": "^3.1.0"
+    "@microsoft/api-extractor": "^7.33.6",
+    "@rollup/plugin-alias": "^4.0.2",
+    "@rollup/plugin-commonjs": "^23.0.3",
+    "@rollup/plugin-json": "^5.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-replace": "^5.0.1",
+    "@rollup/plugin-terser": "^0.1.0",
+    "@rollup/plugin-typescript": "^10.0.1",
+    "rollup": "^3.5.1",
+    "typescript": "^4.9.3"
   }
 }

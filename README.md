@@ -1,5 +1,7 @@
 # Vuetom.js
 
+Current Version: >= 0.5.x
+
 * 💪 Immutable
 * 🔥 Chainable
 
@@ -17,68 +19,42 @@ npm install vuetom --save
 
 #### Node.js
 
-Available Plugins: request, date
+Available Plugins: arr
 
 ```js
 const { createVuetom, isVuetom } = require('vuetom')
 const vt = createVuetom()
 ```
 
-use date plugin
-```js
-const date = require('vuetom/plugin/date')
-vt.use(date)
-console.log(vt.date(new Date(), 'YYYY-MM-DD HH:mm:ss')) // 2022-xx-xx xx:xx:xx
-console.log(vt.getDate()) // get date object
-```
-
-use http request plugin
-
-Function has:
-  
-  - http
-  - httpGet
-  - httpPost
-  - httpJsonp
-  - httpFetch
+use arr plugin
 
 ```js
-const request = require('vuetom/plugin/request')
-vt.use(request)
-vt.http('https://api.github.com/users/yyx990803', {
-  method: 'get'
-}, (err, resp, body) => {
-  console.log('err', err)
-  console.log('body', body)
-})
+const { createVuetom, isVuetom, arr } = require('vuetom')
+const vt = createVuetom()
+vt.use(arr)
+
+const arr1 = []
+vt.arr.addFirst(arr1, 'val1')
+console.log(arr1)
 ```
 
 #### ES6 syntax
 
-Available Plugins: date
+Available Plugins: arr & storage
 
 ```js
-import { createVuetom } from 'vuetom'
-import date from 'vuetom/plugin/date'
-// The usage is the same as nodejs
-// ...
+import { createVuetom, arr } from 'vuetom'
 ```
 
 #### Browser
 
-Available Plugins: date
+Available Plugins: arr & storage
 
 ```html
 <script src="../vuetom/dist/vuetom.js"></script>
-<script src="../vuetom/dist/plugin/date.js"></script>
-<script src="../vuetom/dist/plugin/storage.js"></script>
 <script>
   var vt = vuetom.createVuetom()
-  var vt_date = window.vt_plugin_date
-  var vt_storage = window.vt_plugin_storage
-
-  vt.use(vt_date)
-  console.log(vt.date(new Date, 'YY MM DD'))
+  var vt_storage = vuetom.storage
 
   vt.use(vt_storage)
   vt.storage.set('key1', 'val1')
@@ -89,13 +65,17 @@ Available Plugins: date
 ## Plugins
 
 [Common]
-- date: Simple date time conversion
+
+* arr
 
 [Node]
-- request: HTTP request based on nodejs
+
+* arr: Array Utils
 
 [Browser]
-- storage: LocalStorage Utils
+
+* arr: Array Utils
+* storage: LocalStorage Utils
 
 <br>
 
@@ -114,7 +94,7 @@ cd packages/vuetom
 pnpm b
 
 # build modules
-pnpm b:esm
+pnpm b:es
 
 # build browser node
 pnpm b:umd

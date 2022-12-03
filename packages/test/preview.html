@@ -5,19 +5,27 @@
   <meta charset="utf-8">
   <title>Vuetom Preview</title>
   <script src="../vuetom/dist/vuetom.js"></script>
-  <script src="../vuetom/dist/plugin/date.js"></script>
-  <script src="../vuetom/dist/plugin/storage.js"></script>
   <script>
+    var vt_storage = vuetom.storage
+    var vt_arr = vuetom.arr
     var vt = vuetom.createVuetom()
-    var vt_date = window.vt_plugin_date
-    var vt_storage = window.vt_plugin_storage
 
-    vt.use(vt_date)
-    console.log(vt.date(new Date, 'YY MM DD'))
-
+    // storage
     vt.use(vt_storage)
     vt.storage.set('key1', 'val1')
     console.log(vt.storage.get('key1')) // val1
+
+    // arr
+    vt.use(vt_arr)
+    let arr = []
+    vt.arr.addFirst(arr, 'x1')
+    vt.arr.addFirst(arr, 'x2')
+    vt.arr.removeFirst(arr)
+    console.log(arr)
+    
+    // other
+
+    
   </script>
 </head>
 
